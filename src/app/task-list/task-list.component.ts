@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Task } from '../interfaces/task';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { MatDialog } from '@angular/material/dialog';
+import { TaskDialogComponent } from '../task-dialog/task-dialog.component';
+import { TaskDialogResult } from '../interfaces/task-dialog-result';
 
 @Component({
   selector: 'app-task-list',
@@ -41,11 +44,14 @@ export class TaskListComponent implements OnInit {
       description: 'Wake up and brush your teeth'
     }
   ]
-  constructor() { }
+
+  // add new task will be in the dialog box
+  constructor(private dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
 
+  // for dragging and dropping items between lists and inside list
   drop(event: CdkDragDrop<Task[]>) {
     // if prev and curr containers are same: Item has been dragged into same container
     if(event.previousContainer == event.container) {
@@ -57,6 +63,21 @@ export class TaskListComponent implements OnInit {
     else {
       transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
     }
+  }
+
+  newTask(): void{
+    const dialogRef = this.dialog.open(TaskDialogComponent, {
+      width: '270px',
+      data: {
+        task: {}
+      }
+    });
+    dialogRef.afterClosed().subscribe((result: TaskDialogResult) => {
+      console.log("Dialog was closed");
+      if(result.task.title != undefined)
+        this.todo.push(result.task);
+
+    })
   }
 
 }
