@@ -80,4 +80,26 @@ export class TaskListComponent implements OnInit {
     })
   }
 
+  editTask(list: 'done' | 'todo' | 'inProgress', task: Task): void {
+    console.log("here");
+    const dialogRef = this.dialog.open(TaskDialogComponent, {
+      width: '270px',
+      data: {
+        task,
+        enableDelete: true,
+      }
+    });
+    dialogRef.afterClosed().subscribe((result: TaskDialogResult) => {
+      console.log("Res here", result);
+      const dataList = this[list];
+      const taskIndex = dataList.indexOf(task);
+      if(result.delete) {
+        dataList.splice(taskIndex, 1);
+      }
+      else {
+        dataList[taskIndex] = task;
+      }
+    })
+  }
+
 }
