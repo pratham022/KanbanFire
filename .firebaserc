@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "utility-app-343d6": {
+      "hosting": {
+        "utility-app": [
+          "utility-app-343d6"
+        ]
+      }
+    }
+  }
+}

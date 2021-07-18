@@ -5,6 +5,18 @@ import { MatDialog } from '@angular/material/dialog';
 import { TaskDialogComponent } from '../task-dialog/task-dialog.component';
 import { TaskDialogResult } from '../interfaces/task-dialog-result';
 
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
+
+const getObservable = (collection: AngularFirestoreCollection<Task>) => {
+  const subject = new BehaviorSubject<Task[]>([]);
+  collection.valueChanges({ idField: 'id' }).subscribe((val: Task[]) => {
+    subject.next(val);
+  });
+  return subject;
+};
+
 @Component({
   selector: 'app-task-list',
   templateUrl: './task-list.component.html',
@@ -12,57 +24,41 @@ import { TaskDialogResult } from '../interfaces/task-dialog-result';
 })
 export class TaskListComponent implements OnInit {
 
-  todo: Task[] = [
-    {
-      title: "Buy Milk",
-      description: "Go to store and buy milk"
-    },
-    {
-      title: "Create a Kanban app1",
-      description: "Use firebase and angular to create kanban app"
-    },
-  ];
-
-  inProgress: Task[] = [
-    {
-      title: "In progress Task1",
-      description: "Use firebase and angular to create kanban app"
-    },
-    {
-      title: "In progress Task2",
-      description: "Use firebase and angular to create kanban app"
-    },
-  ]
-
-  done: Task[] = [
-    {
-      title: 'Check email',
-      description: 'Open inbox and check email'
-    },
-    {
-      title: 'Brush teeth',
-      description: 'Wake up and brush your teeth'
-    }
-  ]
+  todo: Observable<Task[]>;
+  inProgress: Observable<Task[]>;
+  done: Observable<Task[]>;
 
   // add new task will be in the dialog box
-  constructor(private dialog: MatDialog) { }
+  constructor(private dialog: MatDialog, private store: AngularFirestore) {
+    
+    this.todo = getObservable(this.store.collection('todo')) as Observable<Task[]>;
+    this.inProgress = getObservable(this.store.collection('inProgress')) as Observable<Task[]>;
+    this.done = getObservable(this.store.collection('done')) as Observable<Task[]>;
+
+  }
 
   ngOnInit(): void {
   }
 
   // for dragging and dropping items between lists and inside list
-  drop(event: CdkDragDrop<Task[]>) {
-    // if prev and curr containers are same: Item has been dragged into same container
-    if(event.previousContainer == event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    }
-    else if (!event.container.data || !event.previousContainer.data) {
+  drop(event: CdkDragDrop<Task[]> | any): void {
+    if (event.previousContainer === event.container) {
       return;
-    } 
-    else {
-      transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
     }
+    const item = event.previousContainer.data[event.previousIndex];
+    this.store.firestore.runTransaction(() => {
+      const promise = Promise.all([
+        this.store.collection(event.previousContainer.id).doc(item.id).delete(),
+        this.store.collection(event.container.id).add(item),
+      ]);
+      return promise;
+    });
+    transferArrayItem(
+      event.previousContainer.data,
+      event.container.data,
+      event.previousIndex,
+      event.currentIndex
+    );
   }
 
   newTask(): void{
@@ -75,7 +71,7 @@ export class TaskListComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result: TaskDialogResult) => {
       console.log("Dialog was closed");
       if(result.task.title != undefined)
-        this.todo.push(result.task);
+      this.store.collection('todo').add(result.task)
 
     })
   }
@@ -90,16 +86,12 @@ export class TaskListComponent implements OnInit {
       }
     });
     dialogRef.afterClosed().subscribe((result: TaskDialogResult) => {
-      console.log("Res here", result);
-      const dataList = this[list];
-      const taskIndex = dataList.indexOf(task);
-      if(result.delete) {
-        dataList.splice(taskIndex, 1);
+      if (result.delete) {
+        this.store.collection(list).doc(task.id).delete();
+      } else {
+        this.store.collection(list).doc(task.id).update(task);
       }
-      else {
-        dataList[taskIndex] = task;
-      }
-    })
+    });
   }
 
 }
