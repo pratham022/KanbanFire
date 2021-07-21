@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { TooltipPosition } from '@angular/material/tooltip';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-main-toolbar',
@@ -7,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainToolbarComponent implements OnInit {
 
-  constructor() { }
+  constructor(public authService: AuthService) { }
 
   ngOnInit(): void {
   }

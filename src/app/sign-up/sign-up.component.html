@@ -1,0 +1,24 @@
+<div class="sign-up-wrapper">
+    <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()" novalidate class="sign-up-form">
+        <h2>Register</h2>
+        <mat-form-field appearance="outline" class="form-field">
+            <input formControlName="email" matInput placeholder="Email ID">
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="form-field">
+            <input type="password" formControlName="password" matInput placeholder="Password">
+        </mat-form-field>
+
+        <div class="error-msg"
+            *ngIf="!signUpForm.controls.email.valid && (signUpForm.controls.email.dirty
+            ||signUpForm.controls.email.touched)">
+            Email is not valid
+        </div>
+        <div class="error-msg"
+            *ngIf="!signUpForm.controls.password.valid && (signUpForm.controls.password.dirty
+            ||signUpForm.controls.password.touched)">
+            Password is not valid
+        </div>
+        <button type="submit" color="primary" mat-raised-button>Register</button>
+        <a routerLink='/sign-in'>Already a user? Login </a>
+    </form>
+</div>

@@ -12,16 +12,23 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { MainToolbarComponent } from './main-toolbar/main-toolbar.component';
 import { TaskComponent } from './task/task.component';
 import { TaskListComponent } from './task-list/task-list.component';
 import { TaskDialogComponent } from './task-dialog/task-dialog.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { SignInComponent } from './sign-in/sign-in.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+
+import { AuthService } from './services/auth.service';
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -40,7 +47,10 @@ const firebaseConfig = {
     MainToolbarComponent,
     TaskComponent,
     TaskListComponent,
-    TaskDialogComponent
+    TaskDialogComponent,
+    SignInComponent,
+    SignUpComponent,
+    ForgotPasswordComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,12 +65,15 @@ const firebaseConfig = {
     MatDialogModule,
     FormsModule,
     MatInputModule,
+    ReactiveFormsModule,
+    MatToolbarModule,
 
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule
+    AngularFirestoreModule, 
+    AngularFireAuthModule
     
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

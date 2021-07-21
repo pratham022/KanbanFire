@@ -44,6 +44,7 @@
             <h2>Done</h2>
             <mat-card
                 cdkDropList
+                id="done"
                 #doneList="cdkDropList"
                 [cdkDropListData]="done | async"
                 [cdkDropListConnectedTo]="[todoList, inProgressList]"
