@@ -8,6 +8,9 @@ import { TaskDialogResult } from '../interfaces/task-dialog-result';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { BehaviorSubject } from 'rxjs';
+import { GetUserinfoService } from '../services/get-userinfo.service';
+import { SnackbarService } from '../services/snackbar.service';
+import { messages } from '../messages';
 
 const getObservable = (collection: AngularFirestoreCollection<Task>) => {
   const subject = new BehaviorSubject<Task[]>([]);
@@ -28,12 +31,30 @@ export class TaskListComponent implements OnInit {
   inProgress: Observable<Task[]>;
   done: Observable<Task[]>;
 
+  currentUid: string = this.getUserInfo.getUserId();
+
   // add new task will be in the dialog box
-  constructor(private dialog: MatDialog, private store: AngularFirestore) {
+  constructor(private dialog: MatDialog, 
+              private store: AngularFirestore, 
+              private getUserInfo: GetUserinfoService, 
+              private snackBarService: SnackbarService) {
     
-    this.todo = getObservable(this.store.collection('todo')) as Observable<Task[]>;
-    this.inProgress = getObservable(this.store.collection('inProgress')) as Observable<Task[]>;
-    this.done = getObservable(this.store.collection('done')) as Observable<Task[]>;
+    this.currentUid = getUserInfo.getUserId();
+
+    this.todo = getObservable(this.store.collection('todo', ref => {
+      return ref
+      .where("uid", "==", this.currentUid);
+    })) as Observable<Task[]>;
+
+    this.inProgress = getObservable(this.store.collection('inProgress', ref => {
+      return ref
+      .where("uid", "==", this.currentUid);
+    })) as Observable<Task[]>;
+
+    this.done = getObservable(this.store.collection('done', ref => {
+      return ref
+      .where("uid", "==", this.currentUid);
+    })) as Observable<Task[]>;
 
   }
 
@@ -65,14 +86,20 @@ export class TaskListComponent implements OnInit {
     const dialogRef = this.dialog.open(TaskDialogComponent, {
       width: '270px',
       data: {
-        task: {}
+        task: {
+          uid: this.getUserInfo.getUserId()
+        }
       }
     });
     dialogRef.afterClosed().subscribe((result: TaskDialogResult) => {
       console.log("Dialog was closed");
-      if(result.task.title != undefined)
-      this.store.collection('todo').add(result.task)
+      if(result.task.title != undefined) {
+        this.store.collection('todo').add(result.task);
+        this.snackBarService.openSnackBar(messages.taskCreated, "Dismiss", messages.success);
+      }
 
+    }, (error: any) => {
+      this.snackBarService.openSnackBar(messages.http500Error, "Dismiss", messages.failure);
     })
   }
 
@@ -88,9 +115,13 @@ export class TaskListComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result: TaskDialogResult) => {
       if (result.delete) {
         this.store.collection(list).doc(task.id).delete();
+        this.snackBarService.openSnackBar(messages.taskDeleted, "Dismiss", messages.success);
       } else {
         this.store.collection(list).doc(task.id).update(task);
+        this.snackBarService.openSnackBar(messages.taskUpdated, "Dismiss", messages.success);
       }
+    }, (error: any) => {
+      this.snackBarService.openSnackBar(messages.http500Error, "Dismiss", messages.failure);
     });
   }
 

@@ -19,6 +19,7 @@ import { TaskComponent } from './task/task.component';
 import { TaskListComponent } from './task-list/task-list.component';
 import { TaskDialogComponent } from './task-dialog/task-dialog.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire';
@@ -67,6 +68,7 @@ const firebaseConfig = {
     MatInputModule,
     ReactiveFormsModule,
     MatToolbarModule,
+    MatSnackBarModule,
 
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule, 

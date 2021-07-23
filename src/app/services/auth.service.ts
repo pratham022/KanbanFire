@@ -4,6 +4,8 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
 import { Router } from "@angular/router";
 import { User } from '../interfaces/user';
 import { Subject, Observable } from 'rxjs';
+import { SnackbarService } from './snackbar.service';
+import { messages } from '../messages';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +21,8 @@ export class AuthService {
     public afs: AngularFirestore,
     public afAuth: AngularFireAuth,
     public router: Router,
-    public ngZone: NgZone
+    public ngZone: NgZone,
+    private snackBarService: SnackbarService
   ) {
     this.afAuth.authState.subscribe(user => {
       if (user) {
@@ -43,8 +46,10 @@ export class AuthService {
           this.router.navigate(['dashboard']);
         });
         this.SetUserData(result.user);
+        this.snackBarService.openSnackBar(messages.loginSuccess, "Dismiss", messages.success);
       }).catch((error) => {
         window.alert(error.message)
+        this.snackBarService.openSnackBar(messages.loginFailure, "Dismiss", messages.failure);
       })
   }
 
@@ -53,8 +58,10 @@ export class AuthService {
     return this.afAuth.createUserWithEmailAndPassword(email, password)
       .then((result) => {
         this.SetUserData(result.user);
+        this.snackBarService.openSnackBar(messages.registerSuccess, "Dismiss", messages.success);
       }).catch((error) => {
         window.alert(error.message)
+        this.snackBarService.openSnackBar(messages.registerFailure, "Dismiss", messages.failure);
       })
   }
 
@@ -110,6 +117,7 @@ export class AuthService {
     return this.afAuth.signOut().then(() => {
       localStorage.removeItem('user');
       this.router.navigate(['sign-in']);
+      this.snackBarService.openSnackBar(messages.loggedOut, "Dismiss", messages.success);
     })
   } 
 
