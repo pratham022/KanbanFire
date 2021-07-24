@@ -14,7 +14,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
-import { MainToolbarComponent } from './main-toolbar/main-toolbar.component';
 import { TaskComponent } from './task/task.component';
 import { TaskListComponent } from './task-list/task-list.component';
 import { TaskDialogComponent } from './task-dialog/task-dialog.component';
@@ -31,6 +30,10 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 
 import { AuthService } from './services/auth.service';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { MainNavComponent } from './main-nav/main-nav.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -46,7 +49,6 @@ const firebaseConfig = {
 @NgModule({
   declarations: [
     AppComponent,
-    MainToolbarComponent,
     TaskComponent,
     TaskListComponent,
     TaskDialogComponent,
@@ -54,6 +56,7 @@ const firebaseConfig = {
     SignUpComponent,
     ForgotPasswordComponent,
     WelcomeComponent,
+    MainNavComponent,
   ],
   imports: [
     BrowserModule,
@@ -74,7 +77,7 @@ const firebaseConfig = {
 
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule, 
-    AngularFireAuthModule
+    AngularFireAuthModule, LayoutModule, MatSidenavModule, MatListModule
     
   ],
   providers: [AuthService],
