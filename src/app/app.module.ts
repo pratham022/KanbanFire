@@ -30,6 +30,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 import { AuthService } from './services/auth.service';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -52,6 +53,7 @@ const firebaseConfig = {
     SignInComponent,
     SignUpComponent,
     ForgotPasswordComponent,
+    WelcomeComponent,
   ],
   imports: [
     BrowserModule,

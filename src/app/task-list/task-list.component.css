@@ -38,3 +38,32 @@
 .cdk-drag-placeholder {
     opacity: 0;
 }
+
+
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .container {
+        width: 240px;
+        margin: 0 15px 15px 0;
+    }
+    .container-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    .container {
+        width: 400px;
+        margin: 0 25px 25px 0;
+    }
+    .container-wrapper {
+        display: flex;
+        justify-content: space-around;
+    }
+
+}

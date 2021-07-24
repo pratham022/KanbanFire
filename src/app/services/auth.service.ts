@@ -43,7 +43,7 @@ export class AuthService {
     return this.afAuth.signInWithEmailAndPassword(email, password)
       .then((result) => {
         this.ngZone.run(() => {
-          this.router.navigate(['dashboard']);
+          this.router.navigate(['home']);
         });
         this.SetUserData(result.user);
         this.snackBarService.openSnackBar(messages.loginSuccess, "Dismiss", messages.success);
@@ -92,7 +92,7 @@ export class AuthService {
     return this.afAuth.signInWithPopup(provider)
     .then((result) => {
       this.ngZone.run(() => {
-          this.router.navigate(['dashboard']);
+          this.router.navigate(['home']);
         })
       this.SetUserData(result.user);
     }).catch((error) => {
