@@ -7,6 +7,8 @@ import { GetUserinfoService } from '../services/get-userinfo.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateWorkspaceComponent } from '../create-workspace/create-workspace.component';
 import { WorkspaceDialogResult } from '../interfaces/workspace-dialog-result';
+import { SnackbarService } from '../services/snackbar.service';
+import { messages } from '../messages';
 
 const getObservable = (collection: AngularFirestoreCollection<Workspace>) => {
   const subject = new BehaviorSubject<Workspace[]>([]);
@@ -30,6 +32,7 @@ export class WorkspaceListComponent implements OnInit {
     private store: AngularFirestore, 
     private getUserInfo: GetUserinfoService,
     private dialog: MatDialog, 
+    private snackBarService: SnackbarService
   ) { 
     this.currentUid = this.getUserInfo.getUserId();
     
@@ -52,11 +55,15 @@ export class WorkspaceListComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((result: WorkspaceDialogResult) => {
       if(result.delete) {
-        this.store.collection('workspaces').doc(workspace.id).delete()
+        this.store.collection('workspaces').doc(workspace.id).delete();
+        this.snackBarService.openSnackBar(messages.workspaceDeleted, "Dismiss", messages.success);
       }
       else {
         this.store.collection('workspaces').doc(workspace.id).update(workspace);
+        this.snackBarService.openSnackBar(messages.workspaceUpdated, "Dismiss", messages.success);
       }
+    }, (error) => {
+      this.snackBarService.openSnackBar(messages.http500Error, "Dismiss", messages.failure);
     })
   }
 
