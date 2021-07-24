@@ -31,6 +31,8 @@ export class MainNavComponent {
       return "Home";
     else if(this.currUrl == '/dashboard')
       return "Kanban";
+    else if(this.currUrl == '/workspaces')
+      return "My Workspaces";
     else  
       return "Menu";
   }

@@ -1,0 +1,11 @@
+<app-main-nav>
+    <div class="workspace-container">
+        <app-workspace 
+            *ngFor="let workspace of (workspaces | async)" 
+            [workspace]="workspace"
+            (edit)="editWorkspace($event)"
+        >
+
+        </app-workspace>
+    </div>
+</app-main-nav>

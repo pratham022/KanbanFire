@@ -1,1 +1,29 @@
-<app-main-nav></app-main-nav>
+<app-main-nav>
+    <div class="card-container">
+        <mat-card (click)="createWorkspace()">
+            <div class="icon-wrapper">
+                <mat-card-title>1. Create a Workspace</mat-card-title>
+                <mat-icon>developer_board</mat-icon>
+            </div>
+            <mat-card-content>Workspaces make it easy for you to collaborate with your teammates</mat-card-content>
+        </mat-card>
+
+        <mat-card (click)="inviteTeammate()">
+            <div class="icon-wrapper">
+                <mat-card-title>2. Invite your teammates</mat-card-title>
+                <mat-icon class="icon-cls">person_add</mat-icon>
+            </div>
+            <mat-card-content>A secret code will be sent to their email. They can join your workspace then</mat-card-content>
+        </mat-card>      
+
+        <mat-card (click)="createBoard()">
+            <div class="icon-wrapper">
+                <mat-card-title>3. Create a Board</mat-card-title>
+                <mat-icon>assignment</mat-icon>
+            </div>
+            
+            <mat-card-content>A Kanban board will help you accomplish great results in a given time</mat-card-content>
+        </mat-card>
+    </div>
+    
+</app-main-nav>

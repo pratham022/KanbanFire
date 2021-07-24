@@ -14,6 +14,13 @@ export const messages = {
     
     http500Error: "Internal Server Error",
 
+    workspaceCreated: "New Workspace Created",
+    workspaceCreateFailure: "Failed to add Workspace",
+    workspaceUpdated: "Workspace Updated",
+    workspaceUpdateFailure: "Falied to update Workspace",
+    workspaceDeleted: "Workspace Deleted",
+    workspaceDeleteFailure: "Failed to delete Workspace",
+
     success: "success",
     failure: "failure"
 

@@ -6,6 +6,7 @@ import { TaskListComponent } from './task-list/task-list.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { AuthGuard } from './auth.guard';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { WorkspaceListComponent } from './workspace-list/workspace-list.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/sign-in', pathMatch: 'full' },
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'home', component: WelcomeComponent, canActivate: [AuthGuard] },
   { path: 'dashboard', component: TaskListComponent, canActivate: [AuthGuard] },
   { path: 'forgot-password', component: ForgotPasswordComponent },
+  { path: 'workspaces', component: WorkspaceListComponent, canActivate: [AuthGuard] }
 
 ];
 

@@ -1,0 +1,19 @@
+.card-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+mat-card {
+    width: 50%;
+    margin: 0.4rem;
+}
+
+mat-card:hover {
+    cursor: pointer;
+}
+.icon-wrapper {
+    display: flex;
+    justify-content: space-between;
+}

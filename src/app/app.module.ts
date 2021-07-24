@@ -34,6 +34,9 @@ import { MainNavComponent } from './main-nav/main-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
+import { CreateWorkspaceComponent } from './create-workspace/create-workspace.component';
+import { WorkspaceListComponent } from './workspace-list/workspace-list.component';
+import { WorkspaceComponent } from './workspace/workspace.component';
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -57,6 +60,9 @@ const firebaseConfig = {
     ForgotPasswordComponent,
     WelcomeComponent,
     MainNavComponent,
+    CreateWorkspaceComponent,
+    WorkspaceListComponent,
+    WorkspaceComponent,
   ],
   imports: [
     BrowserModule,

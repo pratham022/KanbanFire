@@ -1,0 +1,8 @@
+<mat-card class="item" *ngIf="workspace">
+    <div class="title-wrapper">
+        <h2>{{ workspace.name }}</h2>
+        <mat-icon (click)="editWorkspace()">edit</mat-icon>
+    </div>
+    <p> {{ workspace.description }} </p>
+    <p>Members: [ {{ workspace.userNames }} ]</p>
+</mat-card>

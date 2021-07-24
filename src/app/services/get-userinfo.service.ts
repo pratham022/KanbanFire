@@ -24,4 +24,21 @@ export class GetUserinfoService {
       return user.uid;
     }
   }
+
+  getUserEmail(): string {
+
+    let user = null;
+    try {
+      user = JSON.parse(localStorage.getItem('user') || '')
+    } catch(e) {
+      user = null;
+    }
+    if(user === '') user = null;
+
+    if(user == null) 
+      return '';
+    else {
+      return user.email;
+    }
+  }
 }
