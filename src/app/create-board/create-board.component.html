@@ -1,0 +1,25 @@
+<mat-form-field>
+    <mat-label>Name of Board</mat-label>
+    <input matInput cdkFocusInitial [(ngModel)]="data.board.name">
+</mat-form-field>
+<mat-form-field>
+    <mat-label>Select Workspace</mat-label>
+    <mat-select [(value)]="selected">
+      <mat-option *ngFor="let workspace of (workspaces | async)" [value]="workspace.id">
+        {{workspace.name}}
+      </mat-option>
+    </mat-select>
+</mat-form-field>
+<div mat-dialog-actions>
+    <button mat-button (click)="okClicked()">OK</button>
+    <button mat-button (click)="cancel()">Cancel</button>
+    <button 
+        *ngIf="data.enableDelete"
+        mat-fab
+        color="primary"
+        aria-label="Delete"
+        [mat-dialog-close]="{ board: data.board, delete: true }"
+        >
+        <mat-icon>delete</mat-icon>
+    </button>
+</div>

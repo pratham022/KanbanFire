@@ -25,6 +25,10 @@ export const messages = {
     joinedWorkspace: "Joined workspace successfully",
     joinedWorkspaceFailure: "Error while joining workspace! Check the code",
 
+    invalidForm: "Invalid Form. Please check again",
+    boardCreatedSuccess: "Board Created Successfully",
+    boardCreatedFailure: "Cannot create board",
+
     success: "success",
     failure: "failure"
 

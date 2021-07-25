@@ -13,6 +13,7 @@ import { JoinWorkspaceComponent } from '../join-workspace/join-workspace.compone
 import { BehaviorSubject } from 'rxjs';
 import { Workspace } from '../interfaces/workspace'; 
 import  firebase  from 'firebase/app';
+import { CreateBoardComponent } from '../create-board/create-board.component';
 
 
 @Component({
@@ -85,7 +86,29 @@ export class WelcomeComponent implements OnInit {
   }
 
   createBoard() {
-
+    const dialogRef = this.dialog.open(CreateBoardComponent, {
+      width: '270px',
+      data: {
+        board:{}
+      }
+    })
+    dialogRef.afterClosed().subscribe((result: any) => {
+      console.log(result)
+      if(result == undefined || result.btn == 'cancel') {
+        // cancel btn clicked
+      }
+      else {
+        // ok btn clicked
+        let board = result.board.board
+        if(board.name == undefined || board.workspaceId == undefined || board.workspaceId == 'None')
+          this.snackBarService.openSnackBar(messages.invalidForm, "Dismiss", messages.failure);
+        else {
+          this.store.collection('boards').add(board);
+          this.snackBarService.openSnackBar(messages.boardCreatedSuccess, "Dismiss", messages.success);
+        }
+        
+      }
+    })
   }
 
   joinWorkspace() {

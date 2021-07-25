@@ -1,0 +1,6 @@
+<mat-card class="item" *ngIf="board">
+    <div class="title-wrapper">
+        <h2>{{ board.name }}</h2>
+        <mat-icon (click)="editBoard()">edit</mat-icon>
+    </div>
+</mat-card>
