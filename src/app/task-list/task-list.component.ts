@@ -11,6 +11,7 @@ import { BehaviorSubject } from 'rxjs';
 import { GetUserinfoService } from '../services/get-userinfo.service';
 import { SnackbarService } from '../services/snackbar.service';
 import { messages } from '../messages';
+import { ActivatedRoute } from '@angular/router';
 
 const getObservable = (collection: AngularFirestoreCollection<Task>) => {
   const subject = new BehaviorSubject<Task[]>([]);
@@ -31,29 +32,34 @@ export class TaskListComponent implements OnInit {
   inProgress: Observable<Task[]>;
   done: Observable<Task[]>;
 
-  currentUid: string = this.getUserInfo.getUserId();
+  // currentUid: string = this.getUserInfo.getUserId();
+  boardId: string;
 
   // add new task will be in the dialog box
   constructor(private dialog: MatDialog, 
               private store: AngularFirestore, 
+              private router: ActivatedRoute,
               private getUserInfo: GetUserinfoService, 
               private snackBarService: SnackbarService) {
     
-    this.currentUid = getUserInfo.getUserId();
+    // this.currentUid = getUserInfo.getUserId();
+
+    this.boardId = this.router.snapshot.params['bid'];
+    console.log(this.boardId)
 
     this.todo = getObservable(this.store.collection('todo', ref => {
       return ref
-      .where("uid", "==", this.currentUid);
+      .where("boardId", "==", this.boardId);
     })) as Observable<Task[]>;
 
     this.inProgress = getObservable(this.store.collection('inProgress', ref => {
       return ref
-      .where("uid", "==", this.currentUid);
+      .where("boardId", "==", this.boardId);
     })) as Observable<Task[]>;
 
     this.done = getObservable(this.store.collection('done', ref => {
       return ref
-      .where("uid", "==", this.currentUid);
+      .where("boardId", "==", this.boardId);
     })) as Observable<Task[]>;
 
   }
@@ -87,7 +93,7 @@ export class TaskListComponent implements OnInit {
       width: '270px',
       data: {
         task: {
-          uid: this.getUserInfo.getUserId()
+          boardId: this.boardId
         }
       }
     });

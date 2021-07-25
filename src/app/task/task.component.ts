@@ -15,7 +15,7 @@ export class TaskComponent implements OnInit {
     this.task = {
       title: '',
       description: '',
-      uid: getUserInfo.getUserId()
+      boardId: ''
     }
   }
 

@@ -14,10 +14,14 @@ const routes: Routes = [
   { path: 'sign-in', component: SignInComponent },
   { path: 'register-user', component: SignUpComponent },
   { path: 'home', component: WelcomeComponent, canActivate: [AuthGuard] },
-  { path: 'dashboard', component: TaskListComponent, canActivate: [AuthGuard] },
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'workspaces', component: WorkspaceListComponent, canActivate: [AuthGuard] },
-  { path: 'workspaces/:id', component: BoardListComponent, canActivate: [AuthGuard] }
+  { 
+    path: 'workspaces/:id', 
+    component: BoardListComponent, 
+    canActivate: [AuthGuard],
+  },
+  { path: 'workspaces/:id/boards/:bid', component: TaskListComponent, canActivate: [AuthGuard]}
 
 ];
 
