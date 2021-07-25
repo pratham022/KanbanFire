@@ -3,6 +3,9 @@
         <h2>{{ workspace.name }}</h2>
         <mat-icon (click)="editWorkspace()">edit</mat-icon>
     </div>
-    <p> {{ workspace.description }} </p>
+    <div class="title-wrapper">
+        <p> {{ workspace.description }} </p>
+        <mat-icon (click)="openBoards()"> directions_run</mat-icon>
+    </div>
     <p>Members: [ {{ workspace.userNames }} ]</p>
 </mat-card>

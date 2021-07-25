@@ -7,6 +7,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { AuthGuard } from './auth.guard';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { WorkspaceListComponent } from './workspace-list/workspace-list.component';
+import { BoardListComponent } from './board-list/board-list.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/sign-in', pathMatch: 'full' },
@@ -15,7 +16,8 @@ const routes: Routes = [
   { path: 'home', component: WelcomeComponent, canActivate: [AuthGuard] },
   { path: 'dashboard', component: TaskListComponent, canActivate: [AuthGuard] },
   { path: 'forgot-password', component: ForgotPasswordComponent },
-  { path: 'workspaces', component: WorkspaceListComponent, canActivate: [AuthGuard] }
+  { path: 'workspaces', component: WorkspaceListComponent, canActivate: [AuthGuard] },
+  { path: 'workspaces/:id', component: BoardListComponent, canActivate: [AuthGuard] }
 
 ];
 

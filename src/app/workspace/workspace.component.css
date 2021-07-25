@@ -3,7 +3,6 @@
 }
 .item {
     margin-bottom: 10px;
-    cursor: pointer;
     margin: 1rem;
 }
 
@@ -11,4 +10,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+mat-icon:hover {
+    cursor: pointer;
 }

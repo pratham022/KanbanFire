@@ -43,6 +43,7 @@ import { InviteToWorkspaceComponent } from './invite-to-workspace/invite-to-work
 import { JoinWorkspaceComponent } from './join-workspace/join-workspace.component';
 import { BoardComponent } from './board/board.component';
 import { CreateBoardComponent } from './create-board/create-board.component';
+import { BoardListComponent } from './board-list/board-list.component';
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -73,6 +74,7 @@ const firebaseConfig = {
     JoinWorkspaceComponent,
     BoardComponent,
     CreateBoardComponent,
+    BoardListComponent,
   ],
   imports: [
     BrowserModule,

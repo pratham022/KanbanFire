@@ -1,0 +1,11 @@
+<app-main-nav>
+    <div class="workspace-container">
+        <app-board
+            *ngFor="let board of (boards | async)" 
+            [board]="board"
+            (edit)="editBoard($event)"
+        >
+
+        </app-board>
+    </div>
+</app-main-nav>
