@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>Invite a Member</h1>
+<div mat-dialog-content>
+  <mat-form-field appearance="fill">
+    <mat-label>Select Workspace</mat-label>
+    <mat-select [(value)]="selected">
+      <mat-option *ngFor="let workspace of (workspaces | async)" [value]="workspace.id">
+        {{workspace.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="data.closeBtnMsg">No Thanks</button>
+  <button mat-button [mat-dialog-close]="data.okBtnMsg" (click)="copyCode()" cdkFocusInitial>Copy code</button>
+</div>
+

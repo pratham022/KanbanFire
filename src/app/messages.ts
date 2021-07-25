@@ -21,6 +21,10 @@ export const messages = {
     workspaceDeleted: "Workspace Deleted",
     workspaceDeleteFailure: "Failed to delete Workspace",
 
+    codeCopied: "Code copied to your clipboard",
+    joinedWorkspace: "Joined workspace successfully",
+    joinedWorkspaceFailure: "Error while joining workspace! Check the code",
+
     success: "success",
     failure: "failure"
 

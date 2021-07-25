@@ -13,6 +13,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatSelectModule } from '@angular/material/select';
+import { ClipboardModule } from '@angular/cdk/clipboard';
 
 import { TaskComponent } from './task/task.component';
 import { TaskListComponent } from './task-list/task-list.component';
@@ -37,6 +39,8 @@ import { MatListModule } from '@angular/material/list';
 import { CreateWorkspaceComponent } from './create-workspace/create-workspace.component';
 import { WorkspaceListComponent } from './workspace-list/workspace-list.component';
 import { WorkspaceComponent } from './workspace/workspace.component';
+import { InviteToWorkspaceComponent } from './invite-to-workspace/invite-to-workspace.component';
+import { JoinWorkspaceComponent } from './join-workspace/join-workspace.component';
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -63,6 +67,8 @@ const firebaseConfig = {
     CreateWorkspaceComponent,
     WorkspaceListComponent,
     WorkspaceComponent,
+    InviteToWorkspaceComponent,
+    JoinWorkspaceComponent,
   ],
   imports: [
     BrowserModule,
@@ -80,6 +86,8 @@ const firebaseConfig = {
     ReactiveFormsModule,
     MatToolbarModule,
     MatSnackBarModule,
+    MatSelectModule,
+    ClipboardModule,
 
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule, 

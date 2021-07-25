@@ -13,7 +13,7 @@
                 <mat-card-title>2. Invite your teammates</mat-card-title>
                 <mat-icon class="icon-cls">person_add</mat-icon>
             </div>
-            <mat-card-content>A secret code will be sent to their email. They can join your workspace then</mat-card-content>
+            <mat-card-content>You will be provided joining code. You can copy that and send it to your teammate. They can join your workspace by entering that code</mat-card-content>
         </mat-card>      
 
         <mat-card (click)="createBoard()">
@@ -23,6 +23,15 @@
             </div>
             
             <mat-card-content>A Kanban board will help you accomplish great results in a given time</mat-card-content>
+        </mat-card>
+
+        <mat-card (click)="joinWorkspace()">
+            <div class="icon-wrapper">
+                <mat-card-title>Join a Workspace</mat-card-title>
+                <mat-icon>people</mat-icon>
+            </div>
+            
+            <mat-card-content>Use the code given by your friend to join their workspace</mat-card-content>
         </mat-card>
     </div>
     
