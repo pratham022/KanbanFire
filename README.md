@@ -1,27 +1,59 @@
-# UtilityApp
+# KanbanFire
 
+KanbanFire is a task monitoring app for project teams to optimise the flow of work, similar to Trello
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.5.
 
-## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+[Live Demo](https://utility-app-343d6.web.app/register-user)
 
-## Code scaffolding
+![home](https://firebasestorage.googleapis.com/v0/b/utility-app-343d6.appspot.com/o/home.png?alt=media&token=f2efa128-48bc-470e-be3a-c8d3e89934fe)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+![join space](https://firebasestorage.googleapis.com/v0/b/utility-app-343d6.appspot.com/o/join_space.png?alt=media&token=0d3ddc7b-e9b0-44a1-a9b0-30a684ad0d36)
 
-## Build
+![my workspaces](https://firebasestorage.googleapis.com/v0/b/utility-app-343d6.appspot.com/o/joined_spaces.png?alt=media&token=44a3c783-99e6-472f-93b9-48c5dedd6dab)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+![kanban board](https://firebasestorage.googleapis.com/v0/b/utility-app-343d6.appspot.com/o/kanban_board.png?alt=media&token=575682f6-a346-4626-9f6c-e14d3d47b244)
 
-## Running unit tests
+## Features
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- Angular 12.x + Firebase
+- OAuth and Email/Password Signup with Firebase
+- Users can create a Workspace and invite other members for collaboration using a joining code
+- Users can create multiple Kanban boards inside a workspace
+- Drag & drop using @angular/cdk/drag-drop for tasks
 
-## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Usage
 
-## Further help
+1.  Run
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- `git clone https://github.com/pratham022/KanbanFire.git`
+- `cd KanbanFire`
+- `npm install`
+
+2.  Create a project at https://firebase.google.com/ and grab your web config:
+
+3.  Add the config to your Angular environment
+
+#### src/environments/
+
+Update the `environment.prod.ts` and `environment.ts` files. 
+
+```typescript
+export const environment = {
+  production: false,
+  firebase: {
+    apiKey: 'APIKEY',
+    authDomain: 'DEV-APP.firebaseapp.com',
+    databaseURL: 'https://DEV-APP.firebaseio.com',
+    projectId: 'DEV-APP',
+    storageBucket: 'DEV-APP.appspot.com',
+    messagingSenderId: '...',
+    appId: '...',
+  }
+};
+```
+
+
+5.  Run `ng serve`
+
