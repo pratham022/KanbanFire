@@ -1,6 +1,6 @@
 # KanbanFire
 
-KanbanFire is a task monitoring app for project teams to optimise the flow of work, similar to Trello
+KanbanFire is a task monitor app for project teams to optimise the flow of work, similar to Trello
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.5.
 
 
